@@ -6,7 +6,7 @@
 #    By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/07 00:54:41 by amenses-          #+#    #+#              #
-#    Updated: 2023/02/07 02:40:36 by amenses-         ###   ########.fr        #
+#    Updated: 2023/02/07 23:43:10 by amenses-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFLAGS			=	-Wall -Wextra -Werror
 
 LIBFT			=	libft/libft.a
 
-SRCS			=	ps_init.c ps_main.c ps_ops_0.c ps_utils_0.c \
+SRCS			=	ps_init.c ps_main.c ps_ops_0.c ps_utils_0.c tmp.c \
 
 OBJS			=	$(SRCS:.c=.o)
 
@@ -37,3 +37,5 @@ fclean:				clean
 					$(RM) $(NAME)
 
 re:					fclean all
+
+.SILENT:

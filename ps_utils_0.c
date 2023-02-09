@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 01:19:08 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/08 01:18:28 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/09 01:52:36 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,19 @@
 
 t_stack	*ft_stknew(int value)
 {
-	t_stack	*node;
+	t_stack		*node;
+	// t_weight	w;
 
-	node = malloc(sizeof(t_list));
+	node = malloc(sizeof(t_stack));
 	if (!node)
 		return (NULL);
+	// ft_bzero(&w, sizeof(t_weight));
 	node->val = value;
 	node->next = NULL;
 	return (node);
 }
 
-void	ft_stkadd(t_stack **stk, t_stack *new)
+void	ft_stkadd_last(t_stack **stk, t_stack *new)
 {
 	t_stack	*t;
 
@@ -40,6 +42,14 @@ void	ft_stkadd(t_stack **stk, t_stack *new)
 		t = t->next;
 	}
 	t->next = new;
+}
+
+void	ft_stkadd_first(t_stack **stk, t_stack *new)
+{
+	if (!stk || !new)
+		return ;
+	new->next = *stk;
+	*stk = new;
 }
 
 int	ft_stksize(t_stack *stk)

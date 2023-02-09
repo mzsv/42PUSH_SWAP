@@ -18,14 +18,14 @@ OPS
 [+]sa: swap first 2 in a
 [+]sb: swap first 2 in b
 [+]ss: sa and sb
-[]pa: move first in b to top of a
-[]pb: move first in a to top of b
-[]ra: shift a up by 1 (first becomes last)
-[]rb: shift b up by 1 (first becomes last)
-[]rr: ra and rb
-[]rra: reverse ra (shift down, last becomes first)
-[]rrb: reverse rb (shift down, last becomes first)
-[]rrr: rra and rrb
+[+]pa: move first in b to top of a
+[+]pb: move first in a to top of b
+[+]ra: shift a up by 1 (first becomes last)
+[+]rb: shift b up by 1 (first becomes last)
+[+]rr: ra and rb
+[+]rra: reverse ra (shift down, last becomes first)
+[+]rrb: reverse rb (shift up, first becomes last)
+[+]rrr: rra and rrb
 
 INPUT
 -argument: the stack (one input)

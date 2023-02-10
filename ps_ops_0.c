@@ -6,13 +6,25 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 00:58:14 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/09 00:21:35 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/09 22:42:04 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps.h"
 
-void	sa(t_stack *a, t_stack *b)
+void	sa(t_stack **a, t_stack **b)
+{
+	t_data	*t;
+
+	(void)b;
+	if (ft_stksize(*a) < 2)
+		return ;
+	t = (*a)->data;
+	(*a)->data = (*a)->next->data;
+	(*a)->next->data = t;
+}
+
+/* void	sa(t_stack *a, t_stack *b)
 {
 	int t;
 
@@ -22,9 +34,21 @@ void	sa(t_stack *a, t_stack *b)
 	t = a->val;
 	a->val = a->next->val;
 	a->next->val = t;
+} */
+
+void	sb(t_stack **a, t_stack **b)
+{
+	t_data	*t;
+
+	(void)a;
+	if (ft_stksize(*b) < 2)
+		return ;
+	t = (*b)->data;
+	(*b)->data = (*b)->next->data;
+	(*b)->next->data = t;
 }
 
-void	sb(t_stack *a, t_stack *b)
+/* void	sb(t_stack *a, t_stack *b)
 {
 	int t;
 
@@ -34,9 +58,9 @@ void	sb(t_stack *a, t_stack *b)
 	t = b->val;
 	b->val = b->next->val;
 	b->next->val = t;
-}
+} */
 
-void	ss(t_stack *a, t_stack *b)
+void	ss(t_stack **a, t_stack **b)
 {
 	sa(a, b);
 	sb(a, b);

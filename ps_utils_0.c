@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 01:19:08 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/09 01:52:36 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/10 00:57:55 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,30 @@
 t_stack	*ft_stknew(int value)
 {
 	t_stack		*node;
-	// t_weight	w;
 
 	node = malloc(sizeof(t_stack));
 	if (!node)
 		return (NULL);
-	// ft_bzero(&w, sizeof(t_weight));
-	node->val = value;
+	node->data = malloc(sizeof(t_data));
+	if (!node->data)
+		return (NULL);
+	ft_bzero(node->data, sizeof(t_data));
+	node->data->val = value;
 	node->next = NULL;
 	return (node);
 }
+
+/* t_stack	*ft_stknew(int value)
+{
+	t_stack		*node;
+
+	node = malloc(sizeof(t_stack));
+	if (!node)
+		return (NULL);
+	node->val = value;
+	node->next = NULL;
+	return (node);
+} */
 
 void	ft_stkadd_last(t_stack **stk, t_stack *new)
 {
@@ -65,6 +79,24 @@ int	ft_stksize(t_stack *stk)
 	return (i);
 }
 
+void	ft_stkclear(t_stack **stk)
+{
+	t_stack	*t;
+	t_stack	*u;
+
+	if (!*stk)
+		return ;
+	t = *stk;
+	while (t)
+	{
+		u = t->next;
+		free(t->data);
+		free(t);
+		t = u;
+	}
+	*stk = NULL;
+}
+
 long long	ft_long_atoi(const char *nptr)
 {
 	long long	res;
@@ -86,4 +118,11 @@ long long	ft_long_atoi(const char *nptr)
 		nptr++;
 	}
 	return (res * sign);
+}
+
+int	ft_abs(int n)
+{
+	if (n < 0)
+		return (-n);
+	return (n);
 }

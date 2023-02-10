@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 23:33:54 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/09 01:37:14 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/10 00:27:26 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,21 @@ void	printstk(t_stack *stk)
 {
 	while (stk)
 	{
-		ft_printf("s%d\n", stk->val);
+		ft_printf("s%d(%d)\n", stk->data->val, stk->data->dist);
 		// ft_printf("testprintstk=%d\n", stk->next == NULL);
 		stk = stk->next;
 	}
 }
+
+/* void	printstk(t_stack *stk)
+{
+	while (stk)
+	{
+		ft_printf("s%d\n", stk->val);
+		// ft_printf("testprintstk=%d\n", stk->next == NULL);
+		stk = stk->next;
+	}
+} */
 
 void	ft_printarr(int *arr, int size)
 {
@@ -35,7 +45,7 @@ void	ft_printarr(int *arr, int size)
 	ft_printf("\n");
 }
 
-int	ft_check_dups(t_stack *stk)
+/* int	ft_check_dups(t_stack *stk)
 {
 	t_stack	*t;
 
@@ -53,4 +63,4 @@ int	ft_check_dups(t_stack *stk)
 		stk = t;
 	}
 	return (1);
-}
+} */

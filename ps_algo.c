@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 22:56:39 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/10 01:46:30 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/13 01:47:41 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,24 +204,40 @@ void	ft_set_indexes(t_stack **stk)
 		return ;
 	t = *stk;
 	size = ft_stksize(t);
+	// ft_printf("size=%d\n", size);
 	sorted = ft_stktoarr(t, size);
 	sorted = ft_arrsort(sorted, size);
-	ft_printf("sorted: ");
-	ft_printarr(sorted, size);
+	// ft_printf("sorted: ");
+	// ft_printarr(sorted, size);
+	// ft_printf("instk: ");
+	// printstk(t);
 	i = 0;
 	while (t)
 	{
+		// ft_printf("i=%d, ", i);
 		t->data->target_index = ft_arrfind(sorted, t->data->val, size);
 		// ft_printf("test=%d\n", t->data->target_index);
 		// ft_printf("test=%d\n", t->data->val);
 		// ft_printf("testindex=%d\n", t->data->target_index);
 		t->data->tmp_index = i;
-		t->data->dist = ft_abs(t->data->tmp_index - t->data->target_index) % (size / 2 + 1);
-		ft_printf("test=%d\n", t->data->dist);
+		// t->data->dist = t->data->target_index - t->data->tmp_index;
+		t->data->dist = ft_idist(t->data->tmp_index, t->data->target_index, size);
+		// t->data->dist = ft_minabs(t->data->dist, - size + (t->data->target_index - (t->data->tmp_index + 1)));
+		ft_printf("[%d-%d]=%d", t->data->target_index, t->data->tmp_index, t->data->dist);
+		t->data->dir = ft_sign(t->data->dist);
+		// if (t->data->dist)
+		// ft_printf("test=%d\n", t->data->dist);
 		t = t->next;
 		i++;
 	}
 	free(sorted);
+}
+
+int	ft_minabs(int a, int b)
+{
+	if (ft_abs(a) <= ft_abs(b))
+		return (a);
+	return (b);
 }
 
 /* void	ft_set_indexes(t_stack **stk)
@@ -264,3 +280,186 @@ int	ft_entropy(t_stack *stk)
 	return (e);
 }
 
+int	ft_stkindex(int index, int size)
+{
+	if (index < 0)
+		return(size - (ft_abs(index) % size));
+	if (index > size - 1)
+		return (index % size);
+	return (index);
+}
+
+int	ft_idist(int ci, int ti, int size)
+{
+	ci = ft_stkindex(ci, size);
+	// return (ft_minabs(ti - ci, - size + (ti - (ci + 1))));
+	return (ft_minabs(ti - ci, - ((ti + ci + 1) % (size - 1))));
+}
+
+void	ft_set_scores(t_stack **s)
+{
+	t_stack	*t;
+	t_stack	*stk;
+
+	stk = *s;
+	t = stk;
+	while (stk)
+	{
+		stk->data->s = stk->data->dist;
+		ft_printf("ra=(%d-%d)%d->", stk->data->target_index, stk->data->tmp_index - 1, stk->data->r);
+		// stk->data->r = ft_idist(stk->data->tmp_index - 1, stk->data->target_index, ft_stksize(t));
+		stk->data->r = stk->data->target_index - (stk->data->tmp_index - 1);
+		ft_printf("%d+", stk->data->r);
+		// if (stk->data->dir < 0)
+		// 	stk->data->r = stk->data->dist + 1;
+		ft_printf("rr=(%d-%d)%d->", stk->data->target_index, stk->data->tmp_index + 1, stk->data->rr);
+		// stk->data->rr = ft_idist(stk->data->tmp_index + 1, stk->data->target_index, ft_stksize(t));
+		stk->data->rr = stk->data->target_index - (stk->data->tmp_index + 1);
+		ft_printf("%d+", stk->data->rr);
+		// if (stk->data->dir < 0)
+		// 	stk->data->rr = stk->data->dist - 1;
+		stk = stk->next;
+	}
+	stk = t;
+	// ft_printf("(%d,%d)", stk->data->s, stk->next->data->s);
+	// stk->data->s = ft_idist(stk->data->tmp_index + 1, stk->data->target_index, ft_stksize(t));
+	stk->data->s = stk->data->target_index - (stk->data->tmp_index + 1);
+	// if (stk->data->dir < 0)
+	// 	stk->data->s = stk->data->dist + 1;
+	// stk->next->data->s = ft_idist(stk->data->tmp_index - 1, stk->data->target_index, ft_stksize(t));
+	stk->next->data->s = stk->next->data->target_index - (stk->next->data->tmp_index - 1);
+	// if (stk->next->data->dir < 0)
+	// 	stk->next->data->s = stk->next->data->dist + 1;
+	if(stk->data->val == ft_stkmax(stk) && stk->next->data->val == ft_stkmin(stk))
+		stk->data->s = INTMAX;
+	// ft_printf("(%d,%d)", stk->data->s, stk->next->data->s);
+}
+
+int	ft_stkmax(t_stack *stk)
+{
+	t_stack	*t;
+	int		max;
+
+	t = stk;
+	max = INTMIN;
+	while (stk)
+	{
+		if (stk->data->val > max)
+			max = stk->data->val;
+		stk = stk->next;
+	}
+	stk = t;
+	return (max);
+}
+
+int	ft_stkmin(t_stack *stk)
+{
+	t_stack	*t;
+	int		min;
+
+	t = stk;
+	min = INTMAX;
+	while (stk)
+	{
+		if (stk->data->val < min)
+			min = stk->data->val;
+		stk = stk->next;
+	}
+	stk = t;
+	return (min);
+}
+
+void	ft_move(t_stack **s)
+{
+	int	e[3];
+	t_stack	*t;
+	t_stack *stk;
+	int	d;
+
+	ft_bzero(e, sizeof(int) * 3);
+	ft_set_scores(s);
+	stk = *s;
+	d = 100;
+	// if (stk->data->s)
+	// 	sa(&stk, NULL);
+	if (0)
+		exit(1);
+	else
+	{
+		t = *s;
+		while (stk)
+		{
+			stk->data->dist = stk->data->r;
+			stk = stk->next;
+		}
+		stk = t;
+		// ft_printf("(test=%d)", ft_stksize(stk));
+		e[0] = ft_entropy(stk);
+		ft_printf("-entropy_ra=%d-\n", e[0]);
+		while (stk)
+		{
+			stk->data->dist = stk->data->rr;
+			stk = stk->next;
+		}
+		stk = t;
+		// ft_printf("(test=%d)", ft_stksize(stk));
+		e[1] = ft_entropy(stk);
+		ft_printf("-entropy_rra=%d-\n", e[1]);
+		while (stk)
+		{
+			if (e[0] <= e[1] && stk->data->decision != 1)
+			{
+				stk->data->dist = stk->data->r;
+				// stk->data->r = INTMAX;
+			}
+			else
+			{
+				stk->data->dist = stk->data->rr;
+				// stk->data->rr = INTMAX;
+			}
+			stk = stk->next;
+		}
+		stk = t;
+		while (stk)
+		{
+			stk->data->dist = stk->data->s;
+			stk = stk->next;
+		}
+		stk = t;
+		e[2] = ft_entropy(stk);
+		ft_printf("-entropy_sa=%d-\n", e[2]);
+		// ft_printf("(test=%d)", ft_stksize(stk));
+		if ((e[0] < e[2] || e[1] < e[2]) || stk->data->decision == 2)
+		{
+			if (e[0] <= e[1] && stk->data->decision != 1)
+			{
+				ra(s, NULL);
+				// stk->data->decision = 0;
+				d = 0;
+			}
+			else
+			{
+				rra(s, NULL);
+				// stk->data->decision = 1;
+				d = 1;
+			}
+		}
+		else
+		{
+			sa(s, NULL);
+			// stk->data->decision = 2;
+			d = 2;
+		}
+	}
+	ft_set_indexes(s);
+	stk = *s;
+	// int z = 0;
+	while (stk)
+	{
+		stk->data->decision = d;
+		// ft_printf("dec_in=%d(%d)\n", stk->data->decision, z++);
+		stk = stk->next;
+	}
+	stk = *s;
+	// ft_printf("(test=%d)", ft_stksize(stk));
+}

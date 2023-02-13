@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 00:58:30 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/10 01:00:26 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/13 00:18:07 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ typedef struct s_data
 	int	dist;
 	int	tmp_index;
 	int	target_index;
+	int	dir;
+	int	decision;
 }	t_data;
 
 typedef struct s_stack
@@ -75,6 +77,14 @@ void		rrr(t_stack **a, t_stack **b);
 int			*ft_stktoarr(t_stack *stk, int size);
 int			*ft_arrsort(int *arr, int size);
 t_stack		*ft_stksort(t_stack *stk);
+int			ft_stkindex(int index, int size);
+int			ft_idist(int ci, int ti, int size);
+void		ft_set_scores(t_stack **s);
+int			ft_stkmax(t_stack *stk);
+int			ft_stkmin(t_stack *stk);
+void		ft_move(t_stack **s);
+int			ft_minabs(int a, int b);
+
 // int			*ft_sortstk_arr(t_stack *stk);
 void		ft_index(t_stack **stk);
 int			ft_stkfind(t_stack *stk, int value);

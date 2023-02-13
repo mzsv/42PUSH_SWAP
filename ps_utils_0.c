@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 01:19:08 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/10 00:57:55 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/12 21:09:39 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_stack	*ft_stknew(int value)
 		return (NULL);
 	ft_bzero(node->data, sizeof(t_data));
 	node->data->val = value;
+	node->data->decision = -1;
 	node->next = NULL;
 	return (node);
 }

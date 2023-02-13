@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 01:04:43 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/10 01:51:49 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/13 00:51:48 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,16 @@ int	main(int argc, char **argv)
 	printstk(b); */
 	//-------------------------------------------------------
 	t_stack	*a;
-	t_stack	*b;
-	int		*arr;
+	// t_stack	*b;
+	// int		*arr;
 
 	a = ft_get_stack(argc, argv);
-	printstk(a);
-	ra(&a, &b);
+	// printstk(a);
+	// ra(&a, &b);
 	ft_printf("\n");
-	printstk(a);
-	arr = ft_stktoarr(a, ft_stksize(a));
-	ft_printarr(arr, ft_stksize(a));
+	// printstk(a);
+	// arr = ft_stktoarr(a, ft_stksize(a));
+	// ft_printarr(arr, ft_stksize(a));
 	// ft_printarr(ft_arrsort(arr, ft_stksize(a)), ft_stksize(a)); // sorted array
 	ft_printf("\n");
 	// printstk(ft_stksort(a)); // sorted stack
@@ -75,88 +75,29 @@ int	main(int argc, char **argv)
 	ft_set_indexes(&a);
 	printstk(a);
 	ft_printf("entropy=%d\n", ft_entropy(a));
-	rra(&a, &b);
-	ft_set_indexes(&a);
+	while (ft_entropy(a))
+	{
+		// sleep(3);
+		ft_printf("\nMOVE\n");
+		ft_move(&a);
+		printstk(a);
+		ft_printf("entropy=%d\n", ft_entropy(a));
+		ft_printf("decidion=%d\n", a->data->decision);
+	}
+	/* ft_move(&a);
+	ft_printf("\n");
 	printstk(a);
 	ft_printf("entropy=%d\n", ft_entropy(a));
-	rra(&a, &b);
-	ft_set_indexes(&a);
-	printstk(a);
-	ft_printf("entropy=%d\n", ft_entropy(a));
-	sa(&a, &b);
-	ft_set_indexes(&a);
-	printstk(a);
-	ft_printf("entropy=%d\n", ft_entropy(a));
-	ra(&a, &b);
-	ft_set_indexes(&a);
-	printstk(a);
-	ft_printf("entropy=%d\n", ft_entropy(a));
-	sa(&a, &b);
-	ft_set_indexes(&a);
-	printstk(a);
-	ft_printf("entropy=%d\n", ft_entropy(a));
-	ra(&a, &b);
-	ft_set_indexes(&a);
-	printstk(a);
-	ft_printf("entropy=%d\n", ft_entropy(a));
-	ra(&a, &b);
-	ft_set_indexes(&a);
-	printstk(a);
-	ft_printf("entropy=%d\n", ft_entropy(a));
-	ra(&a, &b);
-	ft_set_indexes(&a);
-	printstk(a);
-	ft_printf("entropy=%d\n", ft_entropy(a));
-	sa(&a, &b);
-	ft_set_indexes(&a);
-	printstk(a);
-	ft_printf("entropy=%d\n", ft_entropy(a));
-	rra(&a, &b);
-	ft_set_indexes(&a);
-	printstk(a);
-	ft_printf("entropy=%d\n", ft_entropy(a));
-	rra(&a, &b);
-	ft_set_indexes(&a);
-	printstk(a);
-	ft_printf("entropy=%d\n", ft_entropy(a));
-	rra(&a, &b);
-	ft_set_indexes(&a);
-	printstk(a);
-	ft_printf("entropy=%d\n", ft_entropy(a));
-	sa(&a, &b);
-	ft_set_indexes(&a);
-	printstk(a);
-	ft_printf("entropy=%d\n", ft_entropy(a));
-	rra(&a, &b);
-	ft_set_indexes(&a);
-	printstk(a);
-	ft_printf("entropy=%d\n", ft_entropy(a));
-	sa(&a, &b);
-	ft_set_indexes(&a);
-	printstk(a);
-	ft_printf("entropy=%d\n", ft_entropy(a));
-	rra(&a, &b);
-	ft_set_indexes(&a);
-	printstk(a);
-	ft_printf("entropy=%d\n", ft_entropy(a));
-	sa(&a, &b);
-	ft_set_indexes(&a);
-	printstk(a);
-	ft_printf("entropy=%d\n", ft_entropy(a));
-	ra(&a, &b);
-	ft_set_indexes(&a);
-	printstk(a);
-	ft_printf("entropy=%d\n", ft_entropy(a));
-	ra(&a, &b);
-	ft_set_indexes(&a);
-	printstk(a);
-	ft_printf("entropy=%d\n", ft_entropy(a));
-	sa(&a, &b);
-	ft_set_indexes(&a);
-	printstk(a);
-	ft_printf("entropy=%d\n", ft_entropy(a));
+	ft_printf("decidion=%d\n", a->data->decision); */
 	
-	free(arr);
+	// ft_printf("(test=%d)", ft_stksize(a));
+	// rra(&a, &b);
+	// ft_set_indexes(&a);
+	// printstk(a);
+	// ft_printf("entropy=%d\n", ft_entropy(a));
+	
+	
+	// free(arr);
 	ft_stkclear(&a);
 	return (0);
 }

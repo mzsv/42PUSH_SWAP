@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 01:19:08 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/14 03:46:12 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/14 20:35:23 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	ft_stkadd_first(t_stack **stk, t_stack *new)
 {
 	if (!stk || !new)
 		return ;
+	(*stk)->previous = new;
 	new->next = *stk;
 	new->previous = NULL;
 	*stk = new;

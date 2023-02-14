@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 23:33:54 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/14 03:42:57 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/14 23:31:41 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ void	printstk(t_stack *stk)
 void	rev_printstk(t_stack *stk)
 {
 	t_stack	*t;
+	int	i;
 
+	i = 0;
 	t = stk;
 	while (stk->next)
 		stk = stk->next;
@@ -38,9 +40,12 @@ void	rev_printstk(t_stack *stk)
 	{
 		// sleep(5);
 		// ft_printf("(test)");
-		ft_printf("s%d(%d)\n", stk->data->val, stk->data->dist);
+		ft_printf("%d_s%d(%d)\n", i, stk->data->val, stk->data->dist);
 		// ft_printf("testprintstk=%d\n", stk->next == NULL);
 		stk = stk->previous;
+		if (!stk)
+			ft_printf("(null)\n");
+		i++;
 	}
 	stk = t;
 }

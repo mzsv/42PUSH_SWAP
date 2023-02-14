@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 00:58:30 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/14 03:35:53 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/14 22:50:53 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ typedef struct s_utils
 	int	decision;
 	int	size;
 	int	direction;
+	int	max;
+	int min;
+	int	ra;
+	int rra;
 }	t_utils;
 
 // ps_init
@@ -88,12 +92,13 @@ int			*ft_arrsort(int *arr, int size);
 t_stack		*ft_stksort(t_stack *stk);
 int			ft_stkindex(int index, int size);
 int			ft_idist(int ci, int ti, int size);
-void		ft_set_scores(t_stack **s);
+// void		ft_set_scores(t_stack **s);
+void		ft_set_scores(t_stack **s, t_utils *u);
 int			ft_stkmax(t_stack *stk);
 int			ft_stkmin(t_stack *stk);
 void	ft_direction(t_stack *s, t_utils *u);
 // void	ft_upscore(t_stack **s);
-void	ft_move(t_stack **s, t_utils u);
+void	ft_move(t_stack **s, t_utils *u);
 // void		ft_move(t_stack **s);
 int			ft_minabs(int a, int b);
 void	ft_moveup(t_stack **s);

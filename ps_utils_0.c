@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 01:19:08 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/12 21:09:39 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/14 03:46:12 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_stack	*ft_stknew(int value)
 	node->data->val = value;
 	node->data->decision = -1;
 	node->next = NULL;
+	node->previous = NULL;
 	return (node);
 }
 
@@ -49,13 +50,16 @@ void	ft_stkadd_last(t_stack **stk, t_stack *new)
 	{
 		*stk = new;
 		new->next = NULL;
+		new->previous = NULL;
 		return ;
 	}
 	t = *stk;
+	t->previous = NULL;
 	while (t->next)
 	{
 		t = t->next;
 	}
+	new->previous = t;
 	t->next = new;
 }
 
@@ -64,6 +68,7 @@ void	ft_stkadd_first(t_stack **stk, t_stack *new)
 	if (!stk || !new)
 		return ;
 	new->next = *stk;
+	new->previous = NULL;
 	*stk = new;
 }
 

@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 22:56:39 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/13 01:47:41 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/14 03:50:27 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,9 +221,10 @@ void	ft_set_indexes(t_stack **stk)
 		// ft_printf("testindex=%d\n", t->data->target_index);
 		t->data->tmp_index = i;
 		// t->data->dist = t->data->target_index - t->data->tmp_index;
-		t->data->dist = ft_idist(t->data->tmp_index, t->data->target_index, size);
+		// t->data->dist = ft_idist(t->data->tmp_index, t->data->target_index, size);
+		t->data->dist = ft_indexdist(t->data->tmp_index, t->data->target_index, size);
 		// t->data->dist = ft_minabs(t->data->dist, - size + (t->data->target_index - (t->data->tmp_index + 1)));
-		ft_printf("[%d-%d]=%d", t->data->target_index, t->data->tmp_index, t->data->dist);
+		// ft_printf("[%d-%d]=%d", t->data->target_index, t->data->tmp_index, t->data->dist);
 		t->data->dir = ft_sign(t->data->dist);
 		// if (t->data->dist)
 		// ft_printf("test=%d\n", t->data->dist);
@@ -300,39 +301,30 @@ void	ft_set_scores(t_stack **s)
 {
 	t_stack	*t;
 	t_stack	*stk;
+	int		size;
 
+	size = ft_stksize(*s);
 	stk = *s;
 	t = stk;
 	while (stk)
 	{
+		ft_printf("stk_pos=%d\n", stk->data->tmp_index);
 		stk->data->s = stk->data->dist;
-		ft_printf("ra=(%d-%d)%d->", stk->data->target_index, stk->data->tmp_index - 1, stk->data->r);
-		// stk->data->r = ft_idist(stk->data->tmp_index - 1, stk->data->target_index, ft_stksize(t));
-		stk->data->r = stk->data->target_index - (stk->data->tmp_index - 1);
-		ft_printf("%d+", stk->data->r);
-		// if (stk->data->dir < 0)
-		// 	stk->data->r = stk->data->dist + 1;
-		ft_printf("rr=(%d-%d)%d->", stk->data->target_index, stk->data->tmp_index + 1, stk->data->rr);
-		// stk->data->rr = ft_idist(stk->data->tmp_index + 1, stk->data->target_index, ft_stksize(t));
-		stk->data->rr = stk->data->target_index - (stk->data->tmp_index + 1);
-		ft_printf("%d+", stk->data->rr);
-		// if (stk->data->dir < 0)
-		// 	stk->data->rr = stk->data->dist - 1;
+		ft_printf("ra=(%d-%dto%d)%d->", stk->data->target_index, stk->data->tmp_index, ft_stkindex(stk->data->tmp_index - 1, size), stk->data->r);
+		stk->data->r = ft_indexdist(ft_stkindex(stk->data->tmp_index - 1, size), stk->data->target_index, size);
+		ft_printf("%d | ", stk->data->r);
+		ft_printf("rr=(%d-%d)%d->", stk->data->target_index, ft_stkindex(stk->data->tmp_index + 1, size), stk->data->rr);
+		stk->data->rr = ft_indexdist(ft_stkindex(stk->data->tmp_index + 1, size), stk->data->target_index, size);
+		ft_printf("%d", stk->data->rr);
+		ft_printf("\n");
 		stk = stk->next;
 	}
 	stk = t;
-	// ft_printf("(%d,%d)", stk->data->s, stk->next->data->s);
-	// stk->data->s = ft_idist(stk->data->tmp_index + 1, stk->data->target_index, ft_stksize(t));
-	stk->data->s = stk->data->target_index - (stk->data->tmp_index + 1);
-	// if (stk->data->dir < 0)
-	// 	stk->data->s = stk->data->dist + 1;
-	// stk->next->data->s = ft_idist(stk->data->tmp_index - 1, stk->data->target_index, ft_stksize(t));
-	stk->next->data->s = stk->next->data->target_index - (stk->next->data->tmp_index - 1);
-	// if (stk->next->data->dir < 0)
-	// 	stk->next->data->s = stk->next->data->dist + 1;
-	if(stk->data->val == ft_stkmax(stk) && stk->next->data->val == ft_stkmin(stk))
-		stk->data->s = INTMAX;
-	// ft_printf("(%d,%d)", stk->data->s, stk->next->data->s);
+	stk->data->s = ft_indexdist(ft_stkindex(stk->data->tmp_index + 1, size), stk->data->target_index, size);
+	stk->next->data->s = ft_indexdist(ft_stkindex(stk->data->tmp_index - 1, size), stk->data->target_index, size);
+	if((stk->data->val == ft_stkmax(stk) && stk->next->data->val == ft_stkmin(stk)) || (stk->data->val < stk->next->data->val))
+		stk->data->s = size;
+	// ft_upscore(s);
 }
 
 int	ft_stkmax(t_stack *stk)
@@ -369,21 +361,132 @@ int	ft_stkmin(t_stack *stk)
 	return (min);
 }
 
-void	ft_move(t_stack **s)
+void	ft_direction(t_stack *stk, t_utils *u)
+{
+	t_stack	*t;
+	int		i[2];
+	int		stop;
+
+	t = stk;
+	stop = 0;
+	ft_bzero(&i, sizeof(int) * 2);
+	u->direction = 0;
+	while (stk->next)
+	{
+		if (!stop && !(stk->data->val > stk->next->data->val && (stk->data->val != ft_stkmax(t) && stk->next->data->val != ft_stkmin(t))))
+		{	
+			// ft_printf("test ");
+			i[0]++;
+		}
+		else
+			stop = 1;
+		stk = stk->next;
+	}
+	// ft_printf("(test_i0=%d)", i[0]);
+	if (stk->data->val > t->data->val && (stk->data->val != ft_stkmax(t) && t->data->val != ft_stkmin(t)))
+		u->direction = 1;
+	else
+	{
+		stop = 0;
+		while (stk->previous)
+		{
+			if (!stop && !(stk->data->val < stk->previous->data->val && (stk->data->val != ft_stkmin(t) && stk->previous->data->val != ft_stkmax(t))))
+				i[1]++;
+			else
+				stop = 1;
+			stk = stk->previous;
+			// ft_printf("(%d)", stk->data->val);
+		}
+		// ft_printf("(test_i1=%d)", i[1]);
+		stk = t;
+		if (i[0] && (i[0] < u->size - 1) && (i[0] <= i[1]))
+			u->direction = -1;
+		else if (i[0] && (i[0] < u->size - 1))
+			u->direction = 1;
+		// ft_printf("(test_direction=%d)", u->direction);
+	}
+	stk = t;
+	// exit(1);
+}
+
+/* void	ft_upscore(t_stack **s, t_utils *u)
+{
+	t_stack	*t;
+	t_stack	*stk;
+	int		size;
+	int		min;
+
+	size = ft_stksize(*s);
+	t = *s;
+	stk = *s;
+	min = INTMAX;
+	while (stk->next)
+	{
+		if (stk->data->val > stk->next->data->val && (stk->data->val != ft_stkmax(t) && stk->next->data->val != ft_stkmin(t)))
+		{
+			if (stk->data->tmp_index < size - stk->data->tmp_index)
+				stk->data->up[0] = -stk->data->tmp_index;
+			else
+				stk->data->up[0] = size - stk->data->tmp_index;
+		}
+		else
+			stk->data->up[0] = 0;
+		if (ft_abs(stk->data->up[0]) < ft_abs(min))
+			min = stk->data->up[0];
+		stk = stk->next; // does not compare the last element with the first one !!
+	}
+	stk = t;
+	while (stk->next)
+	{
+		if (ft_abs(stk->data->up[0]) == ft_abs(min))
+		{
+			stk->data->up[1] = 1;
+			ft_printf("test_size=%d,min=%d\n", size, stk->data->up[0]);
+		}
+		stk = stk->next;
+	}
+	stk = t;
+} */
+
+/* void	ft_downscore(t_stack **s)
+{
+	t_stack	*t;
+	t_stack	*stk;
+
+	t = *s;
+	stk = *s;
+	while (stk)
+	{
+		if (stk->data->val > stk->next->data->val && (stk->data->val != ft_stkmax(t) && stk->next->data->val != ft_stkmin(t)))
+			stk->data->up = stk->data->tmp_index;
+		else
+			stk->data->up = 0;
+		stk = stk->next;
+	}
+	stk = t;
+} */
+
+void	ft_move(t_stack **s, t_utils u)
 {
 	int	e[3];
 	t_stack	*t;
 	t_stack *stk;
 	int	d;
+	int	size;
 
+	size = ft_stksize(*s);
 	ft_bzero(e, sizeof(int) * 3);
 	ft_set_scores(s);
 	stk = *s;
 	d = 100;
-	// if (stk->data->s)
-	// 	sa(&stk, NULL);
-	if (0)
-		exit(1);
+	ft_printf("first2=%d,%d(s=%d)\n", stk->data->val, stk->next->data->val, stk->data->s);
+	ft_printf("(test_direction_ftmove=%d)\n", u.direction);
+	if	(stk->data->val > stk->next->data->val && stk->data->s < size)
+	{
+		ft_printf("========TEST===========\n");
+		sa(s, NULL);
+		d = 2;
+	}
 	else
 	{
 		t = *s;
@@ -393,7 +496,6 @@ void	ft_move(t_stack **s)
 			stk = stk->next;
 		}
 		stk = t;
-		// ft_printf("(test=%d)", ft_stksize(stk));
 		e[0] = ft_entropy(stk);
 		ft_printf("-entropy_ra=%d-\n", e[0]);
 		while (stk)
@@ -402,7 +504,6 @@ void	ft_move(t_stack **s)
 			stk = stk->next;
 		}
 		stk = t;
-		// ft_printf("(test=%d)", ft_stksize(stk));
 		e[1] = ft_entropy(stk);
 		ft_printf("-entropy_rra=%d-\n", e[1]);
 		while (stk)
@@ -410,12 +511,10 @@ void	ft_move(t_stack **s)
 			if (e[0] <= e[1] && stk->data->decision != 1)
 			{
 				stk->data->dist = stk->data->r;
-				// stk->data->r = INTMAX;
 			}
 			else
 			{
 				stk->data->dist = stk->data->rr;
-				// stk->data->rr = INTMAX;
 			}
 			stk = stk->next;
 		}
@@ -429,7 +528,19 @@ void	ft_move(t_stack **s)
 		e[2] = ft_entropy(stk);
 		ft_printf("-entropy_sa=%d-\n", e[2]);
 		// ft_printf("(test=%d)", ft_stksize(stk));
-		if ((e[0] < e[2] || e[1] < e[2]) || stk->data->decision == 2)
+		if (u.direction == -1)
+		{
+			ra(s, NULL);
+			// stk->data->decision = 0;
+			d = 0;
+		}
+		else if (u.direction == 1)
+		{
+			rra(s, NULL);
+			// stk->data->decision = 0;
+			d = 1;
+		}
+		else if ((e[0] <= e[2] || e[1] <= e[2]) || stk->data->decision == 2)
 		{
 			if (e[0] <= e[1] && stk->data->decision != 1)
 			{
@@ -462,4 +573,34 @@ void	ft_move(t_stack **s)
 	}
 	stk = *s;
 	// ft_printf("(test=%d)", ft_stksize(stk));
+}
+
+void	ft_moveup(t_stack **s)
+{
+	t_stack	*t;
+	t_stack	*stk;
+	int		u;
+
+	t = *s;
+	stk = *s;
+	while (stk)
+	{
+		if (stk->data->up[1])
+		{
+			ft_printf("========TEST 2==(%d)=========\n", stk->data->up[0]);
+			u = 0;
+			while (u < ft_abs(stk->data->up[0]))
+			{
+				ft_printf("(u=%d)", u);
+				if (stk->data->up[0] < 0)
+					ra(s, NULL);
+				else
+					rra(s, NULL);
+				u++;
+			}
+		}
+		stk = stk->next;
+	}
+	stk = t;
+	
 }

@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 00:58:14 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/12 19:05:31 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/14 03:46:32 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ void	rra(t_stack **a, t_stack **b)
 {
 	t_stack	*t;
 
+	// ft_printf("(test)");
 	(void)b;
 	if (!*a || (ft_stksize(*a) < 2))
 		return ;

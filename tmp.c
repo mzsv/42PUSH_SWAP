@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 23:33:54 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/12 22:58:52 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/14 03:42:57 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,35 @@
 
 void	printstk(t_stack *stk)
 {
+	t_stack	*t;
+
+	t = stk;
 	while (stk)
 	{
+		// ft_printf("(test)");
 		ft_printf("s%d(%d)\n", stk->data->val, stk->data->dist);
 		// ft_printf("testprintstk=%d\n", stk->next == NULL);
 		stk = stk->next;
 	}
+	stk = t;
+}
+
+void	rev_printstk(t_stack *stk)
+{
+	t_stack	*t;
+
+	t = stk;
+	while (stk->next)
+		stk = stk->next;
+	while (stk)
+	{
+		// sleep(5);
+		// ft_printf("(test)");
+		ft_printf("s%d(%d)\n", stk->data->val, stk->data->dist);
+		// ft_printf("testprintstk=%d\n", stk->next == NULL);
+		stk = stk->previous;
+	}
+	stk = t;
 }
 
 /* void	printstk(t_stack *stk)
@@ -64,3 +87,27 @@ void	ft_printarr(int *arr, int size)
 	}
 	return (1);
 } */
+
+int	ft_indexdist(int i, int target, int nelem)
+{
+	int	d1;
+	int	d2;
+
+	if (target > i)
+	{
+		d1 = target - i;
+		d2 = nelem - d1;
+		if (d1 <= d2)
+			return (d1);
+		return (-d2);
+	}
+	if (target < i)
+	{
+		d1 = i - target;
+		d2 = nelem - d1;
+		if (d1 <= d2)
+			return (-d1);
+		return (d2);
+	}
+	return (0);
+}

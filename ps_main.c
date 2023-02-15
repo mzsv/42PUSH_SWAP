@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 01:04:43 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/14 23:33:17 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/15 03:50:51 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,21 +57,21 @@ int	main(int argc, char **argv)
 	ft_printf("\nb\n");
 	printstk(b); */
 	//-------------------------------------------------------
-	t_stack	*a;
-	t_utils	u;
+	/* t_stack	*a;
+	// t_utils	u;
 	// t_stack	*b;
 	// int		*arr;
 
 	a = ft_get_stack(argc, argv);
 	// printstk(a);
 	ft_set_indexes(&a);
-	ft_bzero(&u, sizeof(t_utils));
-	u.size = ft_stksize(a);
-	u.max = ft_stkmax(a);
-	u.min = ft_stkmin(a);
+	// ft_bzero(&u, sizeof(t_utils));
+	// u.size = ft_stksize(a);
+	// u.max = ft_stkmax(a);
+	// u.min = ft_stkmin(a);
 	// printstk(a);
 	// ra(&a, &b);
-	ft_printf("\n");
+	ft_printf("\n"); */
 	// printstk(a);
 	// arr = ft_stktoarr(a, ft_stksize(a));
 	// ft_printarr(arr, ft_stksize(a));
@@ -80,7 +80,7 @@ int	main(int argc, char **argv)
 	// rev_printstk(a);
 	// printstk(ft_stksort(a)); // sorted stack
 	// ft_printf("\nfind=%d\n", ft_stkfind(a, 50)); // stkfind
-	ft_set_indexes(&a);
+	/* ft_set_indexes(&a);
 	ft_printf("\n");
 	printstk(a);
 	// ft_printf("entropy=%d\n", ft_entropy(a));
@@ -100,7 +100,8 @@ int	main(int argc, char **argv)
 		ft_printf("\n");
 		m++;
 	}
-	ft_printf("RESULT=%d\n", m);
+	ft_printf("RESULT=%d\n", m); */
+	// ft_sortstack(&a);
 	// rev_printstk(a);
 	// ft_printf("test_stkindex=%d->%d\n", ft_stkindex(0, 3), ft_indexdist(0, 1, 3));
 	/* ft_move(&a);
@@ -117,6 +118,40 @@ int	main(int argc, char **argv)
 	
 	
 	// free(arr);
-	ft_stkclear(&a);
+	// ft_stkclear(&a);
+	//----------------------------------------------------
+	t_stack	*a;
+
+	a = ft_get_stack(argc, argv);
+	// ft_sortstack(&a);
+	// b = ft_get_stack(argc, argv);
+	/* t_stack	*b;
+	ft_halfstk(&a, &b);
+	ft_printf("_a_\n");
+	printstk(a);
+	ft_printf("_b_\n");
+	printstk(b);
+	ft_printf("\n");
+	ft_sortstack(&a);
+	ft_sortstack(&b); */
+	/* ft_printf("test=%d\n", b == NULL);
+	printstk(a);
+	pb(&a, &b);
+	pb(&a, &b);
+	pb(&a, &b);
+	pa(&a, &b);
+	ft_printf("_a_\n");
+	printstk(a);
+	ft_printf("_b_\n");
+	printstk(b); */
+	t_stack	*b;
+	ft_printf("_a0_\n");
+	printstk(a);
+	ft_n3sort(&a, &b);
+	/* ft_printf("_a_\n");
+	printstk(a);
+	ft_printf("_b_\n");
+	printstk(b);
+	ft_printf("\n"); */
 	return (0);
 }

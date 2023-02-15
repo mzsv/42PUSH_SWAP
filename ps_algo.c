@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 22:56:39 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/14 23:32:39 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/15 02:43:39 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -398,10 +398,12 @@ void	ft_direction(t_stack *stk, t_utils *u)
 			stop = 1;
 		stk = stk->next;
 	}
-	if (!(i[0] % (u->size - 1)))
+	if (!i[0])
 		u->direction = 0;
 	else if (stk->data->val > t->data->val && (stk->data->val != u->max || t->data->val != u->min))
 		u->direction = 1;
+	else if (i[0] == u->size - 1)
+		u->direction = 0;	
 	else
 	{
 		stop = 0;
@@ -420,6 +422,7 @@ void	ft_direction(t_stack *stk, t_utils *u)
 			u->direction = 1;
 	}
 	stk = t;
+	// ft_printf("(direction=%d)", u->direction);
 }
 
 /* void	ft_direction(t_stack *stk, t_utils *u)
@@ -446,8 +449,12 @@ void	ft_direction(t_stack *stk, t_utils *u)
 		// ft_printf("(%d)", stk->data->val);
 	}
 	ft_printf("(test_i0=%d)", i[0]);
+	// ft_printf("(%d>%d)if yes RRA!//", stk->data->val, t->data->val);
 	if (stk->data->val > t->data->val && (stk->data->val != ft_stkmax(t) || t->data->val != ft_stkmin(t)))
+	{
+		ft_printf("FAZ RRA!");
 		u->direction = 1;
+	}
 	else
 	{
 		stop = 0;

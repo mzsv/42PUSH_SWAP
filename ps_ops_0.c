@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 00:58:14 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/14 03:46:32 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/15 01:40:52 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,10 @@ void	pa(t_stack **a, t_stack **b)
 	t = *b;
 	*b = t->next;
 	t->next = NULL;
-	ft_stkadd_first(a, t);
+	if (!*a)
+		*a = t;
+	else
+		ft_stkadd_first(a, t);
 	ft_printf("|pa|\n");
 }
 
@@ -91,7 +94,10 @@ void	pb(t_stack **a, t_stack **b)
 	t = *a;
 	*a = t->next;
 	t->next = NULL;
-	ft_stkadd_first(b, t);
+	if (!*b)
+		*b = t;
+	else
+		ft_stkadd_first(b, t);
 	ft_printf("|pb|\n");
 }
 

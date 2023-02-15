@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 00:58:30 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/14 22:50:53 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/15 03:17:29 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ typedef struct s_utils
 	int	direction;
 	int	max;
 	int min;
+	int	med;
+	int	m[3];
+	int	range_a[2];
+	int	range_b[2];
 	int	ra;
 	int rra;
 }	t_utils;
@@ -114,5 +118,10 @@ int			ft_entropy(t_stack *stk);
 void		printstk(t_stack *stk);
 int			ft_indexdist(int i, int target, int nelem);
 void	rev_printstk(t_stack *stk);
+void	ft_sortstack(t_stack **s);
+int	ft_stkmed(t_stack *stk);
+void	ft_halfstk(t_stack **stk_a, t_stack **stk_b);
+int	ft_mfind(int value, t_utils u);
+void	ft_n3sort(t_stack **a, t_stack **b);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 22:56:39 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/15 02:43:39 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/16 22:57:59 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,26 @@ int	ft_arrfind(int *arr, int value, int size)
 	return (-1);
 }
 
+void	ft_finalindex(t_stack **s, t_utils u)
+{
+	int		*sorted;
+	t_stack	*t;
+
+	if (!*s)
+		return ;
+	t = *s;
+	sorted = ft_stktoarr((*s), u.size);
+	sorted = ft_arrsort(sorted, u.size);
+	while ((*s))
+	{
+		(*s)->data->final = ft_arrfind(sorted, (*s)->data->val, u.size);
+		// ft_printf("final=%d\n", (*s)->data->final);
+		(*s) = (*s)->next;
+	}
+	*s = t;
+	free(sorted);
+}
+
 void	ft_set_indexes(t_stack **stk)
 {
 	t_stack	*t;
@@ -200,7 +220,7 @@ void	ft_set_indexes(t_stack **stk)
 	int		*sorted;
 	int		size;
 
-	if (!stk)
+	if (!*stk)
 		return ;
 	t = *stk;
 	size = ft_stksize(t);

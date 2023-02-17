@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 00:58:30 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/15 03:17:29 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/16 22:44:15 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_data
 	int	dist;
 	int	tmp_index;
 	int	target_index;
+	int	final;
 	int	dir;
 	int	decision;
 	int	up[2];
@@ -111,6 +112,7 @@ void	ft_moveup(t_stack **s);
 void		ft_index(t_stack **stk);
 int			ft_stkfind(t_stack *stk, int value);
 int			ft_arrfind(int *arr, int value, int size);
+void		ft_finalindex(t_stack **s, t_utils u);
 void		ft_set_indexes(t_stack **stk);
 int			ft_entropy(t_stack *stk);
 

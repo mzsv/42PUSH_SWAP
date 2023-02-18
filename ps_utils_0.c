@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 01:19:08 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/16 19:39:44 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/18 01:41:52 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,15 @@ void	ft_stkclear(t_stack **stk)
 	*stk = NULL;
 }
 
+t_stack	*ft_stklast(t_stack *stk)
+{
+	if (!stk || !stk->next)
+		return(stk);
+	while (stk->next)
+		stk = stk->next;
+	return(stk);
+}
+
 long long	ft_long_atoi(const char *nptr)
 {
 	long long	res;
@@ -132,4 +141,16 @@ int	ft_abs(int n)
 	if (n < 0)
 		return (-n);
 	return (n);
+}
+
+void	ft_arrcpy(int *dst, int *src, int nelem)
+{
+	int	i;
+
+	i = 0;
+	while (i < nelem)
+	{
+		dst[i] = src[i];
+		i++;
+	}
 }

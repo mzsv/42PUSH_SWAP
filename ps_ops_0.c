@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 00:58:14 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/16 20:43:47 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/18 04:11:20 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	sa(t_stack **a, t_stack **b)
 	t = (*a)->data;
 	(*a)->data = (*a)->next->data;
 	(*a)->next->data = t;
-	ft_printf("|sa|\n");
+	// ft_printf("|sa|\n");
 }
 
 /* void	sa(t_stack *a, t_stack *b)
@@ -47,7 +47,7 @@ void	sb(t_stack **a, t_stack **b)
 	t = (*b)->data;
 	(*b)->data = (*b)->next->data;
 	(*b)->next->data = t;
-	ft_printf("|sb|\n");
+	// ft_printf("|sb|\n");
 }
 
 /* void	sb(t_stack *a, t_stack *b)
@@ -66,7 +66,7 @@ void	ss(t_stack **a, t_stack **b)
 {
 	sa(a, b);
 	sb(a, b);
-	ft_printf("|ss|\n");
+	// ft_printf("|ss|\n");
 }
 
 void	pa(t_stack **a, t_stack **b)
@@ -82,7 +82,7 @@ void	pa(t_stack **a, t_stack **b)
 		*a = t;
 	else
 		ft_stkadd_first(a, t);
-	ft_printf("|pa|\n");
+	// ft_printf("|pa|\n");
 }
 
 void	pb(t_stack **a, t_stack **b)
@@ -98,7 +98,7 @@ void	pb(t_stack **a, t_stack **b)
 		*b = t;
 	else
 		ft_stkadd_first(b, t);
-	ft_printf("|pb|\n");
+	// ft_printf("|pb|\n");
 }
 
 void	ra(t_stack **a, t_stack **b)
@@ -112,7 +112,7 @@ void	ra(t_stack **a, t_stack **b)
 	*a = t->next;
 	t->next = NULL;
 	ft_stkadd_last(a, t);
-	ft_printf("|ra|\n");
+	// ft_printf("|ra|\n");
 }
 
 void	rb(t_stack **a, t_stack **b)
@@ -126,14 +126,14 @@ void	rb(t_stack **a, t_stack **b)
 	*b = t->next;
 	t->next = NULL;
 	ft_stkadd_last(b, t);
-	ft_printf("|rb|\n");
+	// ft_printf("|rb|\n");
 }
 
 void	rr(t_stack **a, t_stack **b)
 {
 	ra(a, b);
 	rb(a, b);
-	ft_printf("|rr|\n");
+	// ft_printf("|rr|\n");
 }
 
 void	rra(t_stack **a, t_stack **b)
@@ -149,7 +149,7 @@ void	rra(t_stack **a, t_stack **b)
 		t = t->next;
 	ft_stkadd_first(a, t->next);
 	t->next = NULL;
-	ft_printf("|rra|\n");
+	// ft_printf("|rra|\n");
 }
 
 void	rrb(t_stack **a, t_stack **b)
@@ -164,12 +164,12 @@ void	rrb(t_stack **a, t_stack **b)
 		t = t->next;
 	ft_stkadd_first(b, t->next);
 	t->next = NULL;
-	ft_printf("|rrb|\n");
+	// ft_printf("|rrb|\n");
 }
 
 void	rrr(t_stack **a, t_stack **b)
 {
 	rra(a, b);
 	rrb(a, b);
-	ft_printf("|rrr|\n");
+	// ft_printf("|rrr|\n");
 }

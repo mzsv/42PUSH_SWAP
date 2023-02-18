@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 23:33:54 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/17 00:06:38 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/18 04:53:50 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,29 @@ void	printstk(t_stack *stk)
 	while (stk)
 	{
 		// ft_printf("(test)");
-		ft_printf("s%d(%d)(t%d)(f%d)\n", stk->data->val, stk->data->dist, stk->data->target_index, stk->data->final);
+		// sleep(1);
+		ft_printf("s%d(%d)(tmp%d)(t%d)(f%d)\n", stk->data->val, stk->data->dist, stk->data->tmp_index, stk->data->target_index, stk->data->final);
+		/* ft_printf("r=");
+		ft_printarr(stk->data->pa_r, 3);
+		ft_printf("rr=");
+		ft_printarr(stk->data->pa_rr, 3);
+		ft_printf("pa=");
+		ft_printarr(stk->data->pa, 4); */
+		// ft_printf("\n");
+		// ft_printf("s%d(ra%d)(rb%d)(rr%d)\n", stk->data->val, stk->data->pa_r[0], stk->data->target_index, stk->data->final);
 		// ft_printf("testprintstk=%d\n", stk->next == NULL);
 		stk = stk->next;
 	}
 	stk = t;
+}
+
+void	printboth(t_stack *a, t_stack *b)
+{
+	ft_printf("_a_\n");
+	printstk(a);
+	ft_printf("_b_\n");
+	printstk(b);
+	ft_printf("\n");
 }
 
 void	rev_printstk(t_stack *stk)
@@ -138,20 +156,20 @@ void	ft_sortstack(t_stack **s)
 	u.max = ft_stkmax(stk);
 	u.min = ft_stkmin(stk);
 	ft_set_indexes(s);
-	printstk(*s);
+	// printstk(*s);
 	// rra(s, NULL);
 	// rra(s, NULL);
 	// printstk(*s);
 	// exit(1);
 	int m=0;
-	while (ft_entropy(*s) && m<5000)
+	while (ft_entropy(*s))
 	{
 		// sleep(3);
 		// ft_printf("\nMOVE(%d)\n", m);
 		ft_direction(*s, &u);
 		ft_set_indexes(s);
 		ft_move(s, &u);
-		ft_printf("\n");
+		// ft_printf("\n");
 		// printstk(*s);
 		// ft_printf("entropy=%d\n", ft_entropy(a));
 		// ft_printf("decision=%d\n", u.decision);
@@ -159,7 +177,7 @@ void	ft_sortstack(t_stack **s)
 		// ft_printf("\n");
 		m++;
 	}
-	ft_printf("RESULT=%d\n", m);
+	// ft_printf("RESULT=%d\n", m);
 }
 
 int	ft_stkmed(t_stack *stk)
@@ -198,9 +216,13 @@ void	ft_halfstk(t_stack **stk_a, t_stack **stk_b)
 		{
 			// ft_printf("(%d>%d)", (*stk_a)->data->val, med);
 			pb(stk_a, stk_b);
+			ft_printf("pb\n");
 		}
 		else
+		{
 			ra(stk_a, stk_b);
+			ft_printf("ra\n");
+		}
 		// break ;
 		i++;
 	}
@@ -237,34 +259,262 @@ int	ft_mfind(int value, t_utils u)
 	return (0);
 }
 
-/* void	ft_stkrescale(t_stack **stk)
+void	ft_pa_ra(t_stack *a, t_stack **stk_b)
+{
+	t_stack	*tb;
+	t_stack	*ta;
+	t_stack	*la;
+	int		max_a;
+
+	ta = a;
+	tb = *stk_b;
+	la = ft_stklast(a);
+	max_a = ft_stkmax(a);
+	ft_set_indexes(&a);
+	while ((*stk_b))
+	{
+		if ((*stk_b)->data->final < a->data->final && ((*stk_b)->data->final > la->data->final || la->data->final == max_a))
+		{
+			(*stk_b)->data->pa_r[0] = 0; // replace with continue for less lines of code
+		}
+		else
+		{
+			// ft_printf("here.");	
+			while (a->next)
+			{
+				a = a->next;
+				if ((*stk_b)->data->final < a->data->final && (*stk_b)->data->final > a->previous->data->final)
+				{
+					(*stk_b)->data->pa_r[0] = a->data->tmp_index;
+					break ;
+				}
+			}
+			a = ta;
+		}
+		(*stk_b) = (*stk_b)->next;
+	}
+	*stk_b = tb;
+}
+
+void	ft_pa_costs(t_stack **stk_a, t_stack **stk_b)
 {
 	t_stack	*t;
+	int		size_b;
 
-	if (!*stk)
+	if (!*stk_b)
 		return ;
-	ft_set_indexes(stk);
-	t = *stk;
-	while (*stk)
+	t = *stk_b;
+	size_b = ft_stksize(*stk_b);
+	ft_pa_ra(*stk_a, stk_b);
+	ft_set_indexes(stk_b);
+	while ((*stk_b))
 	{
-		
-		(*stk) = (*stk)->next;
+		(*stk_b)->data->pa_r[1] = (*stk_b)->data->tmp_index; // right index?
+		(*stk_b)->data->pa_r[2] = ft_min((*stk_b)->data->pa_r[0], (*stk_b)->data->pa_r[1]);
+		(*stk_b)->data->pa_rr[0] = ft_stksize(*stk_a) - (*stk_b)->data->pa_r[0];
+		(*stk_b)->data->pa_rr[1] = size_b - (*stk_b)->data->pa_r[1];
+		(*stk_b)->data->pa_rr[2] = ft_min((*stk_b)->data->pa_rr[0], (*stk_b)->data->pa_rr[1]);
+		(*stk_b)->data->pa[0] = ft_max((*stk_b)->data->pa_r[0], (*stk_b)->data->pa_r[1]);
+		(*stk_b)->data->pa[1] = (*stk_b)->data->pa_r[0] + (*stk_b)->data->pa_rr[1];
+		(*stk_b)->data->pa[2] = (*stk_b)->data->pa_rr[0] + (*stk_b)->data->pa_r[1];
+		(*stk_b)->data->pa[3] = ft_max((*stk_b)->data->pa_rr[0], (*stk_b)->data->pa_rr[1]);
+		(*stk_b) = (*stk_b)->next;
 	}
+	*stk_b = t;
+}
+
+int	ft_findmin(int *arr, int nelem)
+{
+	int	i;
+	int	r;
+	
+	i = 1;
+	r = 0;
+	while (i < nelem)
+	{
+		// ft_printf("(%d<%d)", arr[i], arr[r]);
+		if (arr[i] < arr[r])
+			r = i;
+		i++;
+	}
+	return (r);
+}
+
+void	ft_setops(int *r_ops, int *rr_ops, int combo)
+{
+	if (combo == 0)
+	{
+		r_ops[0] -= r_ops[2];
+		r_ops[1] -= r_ops[2];
+		ft_bzero(rr_ops, sizeof(int) * 3);
+	}
+	if (combo == 1)
+	{
+		r_ops[1] = 0;
+		r_ops[2] = 0;
+		rr_ops[0] = 0;
+		rr_ops[2] = 0;
+	}
+	if (combo == 2)
+	{
+		r_ops[0] = 0;
+		r_ops[2] = 0;
+		rr_ops[1] = 0;
+		rr_ops[2] = 0;
+	}
+	if (combo == 3)
+	{
+		rr_ops[0] -= rr_ops[2];
+		rr_ops[1] -= rr_ops[2];
+		ft_bzero(r_ops, sizeof(int) * 3);
+	}
+}
+
+void	ft_pa_decision(t_stack *b, t_utils *u)
+{
+	t_stack	*t;
+	int		tmp;
+	int		i;
+
+	t = b;
+	u->combo = ft_findmin(b->data->pa, 4);
+	tmp = b->data->pa[u->combo];
+	ft_arrcpy(u->r, b->data->pa_r, 3);
+	ft_arrcpy(u->rr, b->data->pa_rr, 3);
+	// ft_printf("(i=%d,minpa0=%d)", u->combo, b->data->pa[u->combo]);
+	while (b->next && tmp > 1) // if 0 or 1, no changes
+	{
+		b = b->next;
+		i = ft_findmin(b->data->pa, 4);
+		// ft_printf("(val=%d,i=%d,minpa=%d)", b->data->val, i, b->data->pa[i]);
+		if (b->data->pa[i] < tmp)
+		{
+			u->combo = i;
+			tmp = b->data->pa[u->combo];
+			ft_arrcpy(u->r, b->data->pa_r, 3);
+			ft_arrcpy(u->rr, b->data->pa_rr, 3);
+		}
+	}
+	ft_setops(u->r, u->rr, u->combo);
+	// ft_printarr(u->r, 3);
+	// exit(1);
+	b = t;
+}
+
+void	ft_pb_move(t_stack **stk_a, t_stack **stk_b, t_utils u)
+{
+	int	i;
+
+	i = 0;
+	while (i < u.size - 3) // u.m len
+	{
+		// ft_printf("test=%d(%d)\n", (*stk_a)->data->val, ft_mfind((*stk_a)->data->val, u));
+		// ft_printarr(u.m, 3);
+		if (!ft_mfind((*stk_a)->data->val, u))
+		{
+			pb(stk_a, stk_b);
+			ft_printf("pb\n");
+			// exit(1);
+			i++;
+		}
+		else
+		{
+			ra(stk_a, stk_b);
+			ft_printf("ra\n");
+		}
+	}
+}
+
+void	ft_r_employops(t_stack **stk_a, t_stack **stk_b, int *r_ops)
+{
+	int	i;
+
+	// apply ra
+	i = 0;
+	while (i < r_ops[0])
+	{
+		ra(stk_a, stk_b);
+		ft_printf("ra\n");
+		i++;
+	}
+	// apply rb
+	i = 0;
+	while (i < r_ops[1])
+	{
+		rb(stk_a, stk_b);
+		ft_printf("rb\n");
+		i++;
+	}
+	// apply rr
+	i = 0;
+	while (i < r_ops[2])
+	{
+		rr(stk_a, stk_b);
+		ft_printf("rr\n");
+		i++;
+	}
+}
+
+void	ft_rr_employops(t_stack **stk_a, t_stack **stk_b, int *rr_ops)
+{
+	int	i;
+
+	// apply rra
+	i = 0;
+	while (i < rr_ops[0])
+	{
+		rra(stk_a, stk_b);
+		ft_printf("rra\n");
+		i++;
+	}
+	// apply rrb
+	i = 0;
+	while (i < rr_ops[1])
+	{
+		rrb(stk_a, stk_b);
+		ft_printf("rrb\n");
+		i++;
+	}
+	// apply rrr
+	i = 0;
+	while (i < rr_ops[2])
+	{
+		rrr(stk_a, stk_b);
+		ft_printf("rrr\n");
+		i++;
+	}
+}
+
+/* void	ft_pa_move(t_stack **stk_a, t_stack **stk_b)
+{
+	t_utils	u;
+	int		i;
+
+	ft_bzero(&u, sizeof(t_utils));
+	ft_set_limits(*stk_a, &u);
+	ft_finalindex(stk_a, u);
+	ft_pb_move(stk_a, stk_b, u);
+	ft_sortstack(stk_a);
+	ft_pa_costs(stk_a, stk_b);
+	ft_pa_decision(*stk_b, &u);
+	ft_r_employops(stk_a, stk_b, u.r);
+	ft_rr_employops(stk_a, stk_b, u.rr);
+	pa(stk_a, stk_b);
 } */
 
 void	ft_n3sort(t_stack **stk_a, t_stack **stk_b)
 {
 	t_utils	u;
 	int		i;
+	t_stack	*last;
 	// t_stack	*a;
 	// t_stack	*b;
-
 	ft_bzero(&u, sizeof(t_utils));
 	ft_set_limits(*stk_a, &u);
-	ft_printarr(u.m, 3);
+	// ft_printarr(u.m, 3);
 	// ft_set_indexes(stk_a);
 	ft_finalindex(stk_a, u);
-	printstk(*stk_a);
+	// printstk(*stk_a);
 	// exit(1);
 	i = 0;
 	while (i < u.size - 3) // u.m len
@@ -274,11 +524,15 @@ void	ft_n3sort(t_stack **stk_a, t_stack **stk_b)
 		if (!ft_mfind((*stk_a)->data->val, u))
 		{
 			pb(stk_a, stk_b);
+			ft_printf("pb\n");
 			// exit(1);
 			i++;
 		}
 		else
+		{
 			ra(stk_a, stk_b);
+			ft_printf("ra\n");
+		}
 	}
 	// ft_printf("===separated====\n");
 	// a = *stk_a;
@@ -288,6 +542,13 @@ void	ft_n3sort(t_stack **stk_a, t_stack **stk_b)
 	// sa(&a, &b);
 	// rra(stk_a, stk_b);
 	ft_sortstack(stk_a);
+	// printstk(*stk_a);
+	// exit(1);
+	ft_pa_costs(stk_a, stk_b);
+	// printboth(*stk_a, *stk_b);
+	ft_pa_decision(*stk_b, &u);
+	// printboth(*stk_a, *stk_b);
+	// ft_printf("combo=%d\n", u.combo);
 	// ft_set_indexes(stk_a);
 	/* ft_printf("_a_\n");
 	printstk(*stk_a);
@@ -302,10 +563,12 @@ void	ft_n3sort(t_stack **stk_a, t_stack **stk_b)
 	ft_printf("size=%d\n", ft_stksize(*stk_a)); */
 	i = 0;
 	// while (ft_stksize(*stk_a) < u.size && count < 500000)
-	while (i < u.size - 3 && count < 30)
+	// while (i < u.size - 3 && count < 8)
+	while (*stk_b)
 	{
-		ft_printf("%d/", i);
-		ft_printf("((%d)t%d==t%d(%d))", (*stk_a)->data->val, (*stk_a)->data->final, (*stk_b)->data->final + 1, (*stk_b)->data->val);
+		last = ft_stklast(*stk_a);
+		// ft_printf("%d/", i);
+		// ft_printf("((%d)f%d>f%d(%d))", (*stk_a)->data->val, (*stk_a)->data->final, (*stk_b)->data->final, (*stk_b)->data->val);
 		// if ((*stk_a)->data->final == (*stk_b)->data->final + 1)
 		// {
 		// 	pa(stk_a, stk_b);
@@ -313,13 +576,43 @@ void	ft_n3sort(t_stack **stk_a, t_stack **stk_b)
 		// }
 		// else
 		// 	ra(stk_a, stk_b);
-		if ((*stk_a)->data->final == ft_stkindex((*stk_b)->data->final + 1, u.size))
+		// if ((*stk_a)->data->final == ft_stkindex((*stk_b)->data->final + 1, u.size))
+		if ((*stk_b)->data->final < (*stk_a)->data->final && ((*stk_b)->data->final > last->data->final || last->data->final == u.max))
+		// if (ft_stkindex((*stk_b)->data->final + 1, u.size) == (*stk_a)->data->final)
 		{
+			// ft_printf("=%d<<%d=", (*stk_b)->data->final, (*stk_a)->data->final);
 			pa(stk_a, stk_b);
+			ft_printf("pa\n");
 			i++;
 		}
 		else
-			rb(stk_a, stk_b);
+		{
+			ft_pa_costs(stk_a, stk_b);
+			ft_pa_decision(*stk_b, &u);
+			/* ft_printf("r_ops: ");
+			ft_printarr(u.r, 3);
+			ft_printf("rr_ops: ");
+			ft_printarr(u.rr, 3);
+			ft_printf("combo=%d\n", u.combo); */
+			// printboth(*stk_a, *stk_b);
+			// ft_printf("decision_combo=%d\n", u.combo);
+			// exit(1);
+			ft_r_employops(stk_a, stk_b, u.r);
+			ft_rr_employops(stk_a, stk_b, u.rr);
+			pa(stk_a, stk_b);
+			ft_printf("pa\n");
+			if ((*stk_a)->data->val == 364)
+			{
+				printboth(*stk_a, *stk_b);
+				ft_printf("decision_combo=%d\n", u.combo);
+				exit(1);
+			}
+		}
+		// else
+		// {
+		// 	ra(stk_a, stk_b);
+		// }
+		// printboth(*stk_a, *stk_b);
 		/* ft_printf("_a_\n");
 		printstk(*stk_a);
 		ft_printf("_b_\n");
@@ -330,7 +623,17 @@ void	ft_n3sort(t_stack **stk_a, t_stack **stk_b)
 		// 	exit(1);
 	}
 	// exit(1);
+	// printf("=================================================\n");
+	// printf("=================================================\n");
+	// printf("=================================================\n");
+	// sleep(3);
+	printboth(*stk_a, *stk_b);
+	exit(1);
 	ft_sortstack(stk_a);
+	// printboth(*stk_a, *stk_b);
+	// exit(1);
+	// printboth(*stk_a, *stk_b);
+	
 	/* ft_printf("_a_\n");
 	printstk(*stk_a);
 	ft_printf("_b_\n");

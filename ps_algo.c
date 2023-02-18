@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 22:56:39 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/16 22:57:59 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/18 04:35:39 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -519,6 +519,7 @@ void	ft_move(t_stack **s, t_utils *u)
 	if	(stk->data->val > stk->next->data->val && (stk->data->val != u->max || stk->next->data->val != u->min))
 	{
 		sa(s, NULL);
+		ft_printf("sa\n");
 		d = 2;
 	}
 	else
@@ -529,11 +530,13 @@ void	ft_move(t_stack **s, t_utils *u)
 		if (u->direction == -1)
 		{
 			ra(s, NULL);
+			ft_printf("ra\n");
 			d = 0;
 		}
 		else if (u->direction == 1)
 		{
 			rra(s, NULL);
+			ft_printf("rra\n");
 			d = 1;
 		}
 		else
@@ -541,11 +544,13 @@ void	ft_move(t_stack **s, t_utils *u)
 			if (e[0] <= e[1] && u->decision != 1)
 			{
 				ra(s, NULL);
+				ft_printf("ra\n");
 				d = 0;
 			}
 			else
 			{
 				rra(s, NULL);
+				ft_printf("rra\n");
 				d = 1;
 			}
 		}
@@ -682,9 +687,15 @@ void	ft_moveup(t_stack **s)
 			{
 				ft_printf("(u=%d)", u);
 				if (stk->data->up[0] < 0)
+				{
 					ra(s, NULL);
+					ft_printf("ra\n");
+				}
 				else
+				{
 					rra(s, NULL);
+					ft_printf("rra\n");
+				}
 				u++;
 			}
 		}

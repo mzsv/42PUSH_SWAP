@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 00:58:30 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/16 22:44:15 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/18 02:02:58 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ typedef struct s_data
 	int	dir;
 	int	decision;
 	int	up[2];
+	int	pa_r[3];
+	int	pa_rr[3];
+	int	pa[4];
 }	t_data;
 
 typedef struct s_stack
@@ -54,6 +57,9 @@ typedef struct s_utils
 	int	range_b[2];
 	int	ra;
 	int rra;
+	int	r[3];
+	int	rr[3];
+	int	combo;
 }	t_utils;
 
 // ps_init
@@ -69,7 +75,9 @@ void		ft_stkadd_last(t_stack **stk, t_stack *new);
 void		ft_stkadd_first(t_stack **stk, t_stack *new);
 int			ft_stksize(t_stack *stk);
 void		ft_stkclear(t_stack **stk);
+t_stack		*ft_stklast(t_stack *stk);
 int			ft_abs(int n);
+void	ft_arrcpy(int *dst, int *src, int nelem);
 
 // ps_main
 void		ft_error(char *msg);
@@ -118,12 +126,18 @@ int			ft_entropy(t_stack *stk);
 
 // tmp
 void		printstk(t_stack *stk);
+void	printboth(t_stack *a, t_stack *b);
 int			ft_indexdist(int i, int target, int nelem);
 void	rev_printstk(t_stack *stk);
 void	ft_sortstack(t_stack **s);
-int	ft_stkmed(t_stack *stk);
+int		ft_stkmed(t_stack *stk);
 void	ft_halfstk(t_stack **stk_a, t_stack **stk_b);
-int	ft_mfind(int value, t_utils u);
+int		ft_mfind(int value, t_utils u);
+void	ft_pa_ra(t_stack *a, t_stack **stk_b);
+void	ft_pa_costs(t_stack **stk_a, t_stack **stk_b);
+void	ft_setops(int *r_ops, int *rr_ops, int combo);
+int	ft_findmin(int *arr, int nelem);
+void	ft_pa_decision(t_stack *b, t_utils *u);
 void	ft_n3sort(t_stack **a, t_stack **b);
 
 #endif

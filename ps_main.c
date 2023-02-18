@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 01:04:43 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/16 23:49:53 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/18 03:15:33 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,27 +162,45 @@ int	main(int argc, char **argv)
 	printstk(a);
 	ft_printf("_b_\n");
 	printstk(b); */
+	/* t_stack	*a1;
+
+	a1 = ft_get_stack(argc, argv);
+	// ft_printf("_a0_\n");
+	// printstk(a1);
+	ft_sortstack(&a1);
+	// ft_printf("_a_\n");
+	// printstk(a1); */
 	/* t_stack	*a;
+	t_stack	*b;
 
 	a = ft_get_stack(argc, argv);
+	b = NULL;
 	// ft_printf("_a0_\n");
 	// printstk(a);
-	ft_sortstack(&a);
-	ft_printf("_a_\n");
-	printstk(a); */
+	// ft_printf("===================\n");
+	ft_n3sort(&a, &b);
+	// ft_printf("_a_\n");
+	// printstk(a);
+	// ft_printf("_b_\n");
+	// printstk(b);
+	// ft_printf("\n"); */
 	t_stack	*a;
 	t_stack	*b;
 
 	a = ft_get_stack(argc, argv);
 	b = NULL;
-	ft_printf("_a0_\n");
-	printstk(a);
-	ft_printf("===================\n");
 	ft_n3sort(&a, &b);
-	ft_printf("_a_\n");
-	printstk(a);
-	ft_printf("_b_\n");
-	printstk(b);
-	ft_printf("\n");
+	/* (void)argc;
+	(void)argv;
+	int a[]={1, 8, 2};
+	int b[]={1, 8, 2};
+	
+	ft_printarr(a, 3);
+	// ft_bzero(a, 4*sizeof(int));
+	ft_setops(a, b, 0);
+	ft_printarr(a, 3);
+	ft_printarr(b, 3);
+	
+	// ft_printf("test=%d\n", ft_findmin(a, 4)); */
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 00:58:30 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/18 02:02:58 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/19 04:42:35 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_utils
 	int	max;
 	int min;
 	int	med;
-	int	m[3];
+	int	m[5];
 	int	range_a[2];
 	int	range_b[2];
 	int	ra;
@@ -80,8 +80,8 @@ int			ft_abs(int n);
 void	ft_arrcpy(int *dst, int *src, int nelem);
 
 // ps_main
-void		ft_error(char *msg);
 long long	ft_long_atoi(const char *nptr);
+void	ft_term_pushswap(char *msg, t_stack **stk);
 
 // ps_ops
 void		sa(t_stack **a, t_stack **b);
@@ -133,8 +133,8 @@ void	ft_sortstack(t_stack **s);
 int		ft_stkmed(t_stack *stk);
 void	ft_halfstk(t_stack **stk_a, t_stack **stk_b);
 int		ft_mfind(int value, t_utils u);
-void	ft_pa_ra(t_stack *a, t_stack **stk_b);
-void	ft_pa_costs(t_stack **stk_a, t_stack **stk_b);
+void	ft_pa_ra(t_stack *a, t_stack **stk_b, t_utils u);
+void	ft_pa_costs(t_stack **stk_a, t_stack **stk_b, t_utils u);
 void	ft_setops(int *r_ops, int *rr_ops, int combo);
 int	ft_findmin(int *arr, int nelem);
 void	ft_pa_decision(t_stack *b, t_utils *u);

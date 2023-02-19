@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 01:19:08 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/18 01:41:52 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/18 20:33:10 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,8 @@ long long	ft_long_atoi(const char *nptr)
 			sign = -1;
 		nptr++;
 	}
+	if (ft_strlen(nptr) > 10)
+		return (2147483648);
 	while ((*nptr >= 48 && *nptr <= 57) && *nptr)
 	{
 		res = res * 10 + *nptr - '0';

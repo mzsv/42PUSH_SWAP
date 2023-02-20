@@ -6,13 +6,13 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 01:19:08 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/18 20:33:10 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/20 01:27:18 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps.h"
 
-t_stack	*ft_stknew(int value)
+t_stack	*ft_stknew(int value) // stk0
 {
 	t_stack		*node;
 
@@ -26,7 +26,7 @@ t_stack	*ft_stknew(int value)
 	node->data->val = value;
 	node->data->decision = -1;
 	node->next = NULL;
-	node->previous = NULL;
+	node->prev = NULL;
 	return (node);
 }
 
@@ -42,7 +42,7 @@ t_stack	*ft_stknew(int value)
 	return (node);
 } */
 
-void	ft_stkadd_last(t_stack **stk, t_stack *new)
+void	ft_stkadd_last(t_stack **stk, t_stack *new) // stk0
 {
 	t_stack	*t;
 
@@ -50,30 +50,30 @@ void	ft_stkadd_last(t_stack **stk, t_stack *new)
 	{
 		*stk = new;
 		new->next = NULL;
-		new->previous = NULL;
+		new->prev = NULL;
 		return ;
 	}
 	t = *stk;
-	t->previous = NULL;
+	t->prev = NULL;
 	while (t->next)
 	{
 		t = t->next;
 	}
-	new->previous = t;
+	new->prev = t;
 	t->next = new;
 }
 
-void	ft_stkadd_first(t_stack **stk, t_stack *new)
+void	ft_stkadd_first(t_stack **stk, t_stack *new) // stk0
 {
 	if (!stk || !new)
 		return ;
-	(*stk)->previous = new;
+	(*stk)->prev = new;
 	new->next = *stk;
-	new->previous = NULL;
+	new->prev = NULL;
 	*stk = new;
 }
 
-int	ft_stksize(t_stack *stk)
+int	ft_stksize(t_stack *stk) // stk1
 {
 	int	i;
 
@@ -86,7 +86,7 @@ int	ft_stksize(t_stack *stk)
 	return (i);
 }
 
-void	ft_stkclear(t_stack **stk)
+void	ft_stkclear(t_stack **stk) // stk0
 {
 	t_stack	*t;
 	t_stack	*u;
@@ -104,7 +104,7 @@ void	ft_stkclear(t_stack **stk)
 	*stk = NULL;
 }
 
-t_stack	*ft_stklast(t_stack *stk)
+t_stack	*ft_stklast(t_stack *stk) // stk0
 {
 	if (!stk || !stk->next)
 		return(stk);
@@ -113,7 +113,7 @@ t_stack	*ft_stklast(t_stack *stk)
 	return(stk);
 }
 
-long long	ft_long_atoi(const char *nptr)
+long long	ft_long_atoi(const char *nptr) // utils
 {
 	long long	res;
 	int			sign;
@@ -138,14 +138,14 @@ long long	ft_long_atoi(const char *nptr)
 	return (res * sign);
 }
 
-int	ft_abs(int n)
+int	ft_abs(int n) // utils
 {
 	if (n < 0)
 		return (-n);
 	return (n);
 }
 
-void	ft_arrcpy(int *dst, int *src, int nelem)
+void	ft_arrcpy(int *dst, int *src, int nelem) // utils
 {
 	int	i;
 

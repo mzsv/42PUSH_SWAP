@@ -5,20 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/07 01:04:43 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/19 18:49:34 by amenses-         ###   ########.fr       */
+/*   Created: 2023/02/19 23:30:41 by amenses-          #+#    #+#             */
+/*   Updated: 2023/02/20 02:51:18 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps.h"
-
-void	ft_error(char *msg)
-{
-	if (!msg)
-		exit(1);
-	ft_printf("%s\n", msg);
-	exit(1);
-}
 
 void	ft_term_pushswap(char *msg, t_stack **stk)
 {
@@ -31,14 +23,13 @@ int	main(int argc, char **argv)
 {
 	t_stack	*a;
 
-	if (argc < 3)
-		exit(1);
 	if (!ft_check_input(argc, argv))
 		ft_error("Error");
+	if (argc < 3)
+		exit(1);
 	a = ft_get_stack(argc, argv);
 	if (!ft_check_dups(a))
-		ft_term_pushswap("Error", &a); // terminate
-	// ft_printf("test=%d\n", ft_check_order(a));
+		ft_term_pushswap("Error", &a);
 	if (ft_check_order(a))
 		ft_term_pushswap(NULL, &a);
 	if (ft_stksize(a) < 6)

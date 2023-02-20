@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 00:58:30 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/19 04:42:35 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/19 22:17:02 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdio.h>
 # define INTMAX	2147483647
 # define INTMIN	-2147483648
+# define NLEFT 3
 
 typedef struct s_data
 {
@@ -26,12 +27,12 @@ typedef struct s_data
 	int	r;
 	int	rr;
 	int	dist;
-	int	tmp_index;
-	int	target_index;
-	int	final;
-	int	dir;
+	int	i;
+	int	target;
+	int	fi;
+	// int	dir;
 	int	decision;
-	int	up[2];
+	// int	up[2];
 	int	pa_r[3];
 	int	pa_rr[3];
 	int	pa[4];
@@ -39,7 +40,7 @@ typedef struct s_data
 
 typedef struct s_stack
 {
-	struct s_stack	*previous;
+	struct s_stack	*prev;
 	t_data			*data;
 	struct s_stack	*next;
 }	t_stack;
@@ -49,12 +50,12 @@ typedef struct s_utils
 	int	decision;
 	int	size;
 	int	direction;
-	int	max;
-	int min;
-	int	med;
-	int	m[5];
-	int	range_a[2];
-	int	range_b[2];
+	// int	max;
+	// int min;
+	// int	med;
+	int	m[3];
+	// int	range_a[2];
+	// int	range_b[2];
 	int	ra;
 	int rra;
 	int	r[3];
@@ -81,6 +82,7 @@ void	ft_arrcpy(int *dst, int *src, int nelem);
 
 // ps_main
 long long	ft_long_atoi(const char *nptr);
+void	ft_error(char *msg);
 void	ft_term_pushswap(char *msg, t_stack **stk);
 
 // ps_ops
@@ -98,6 +100,7 @@ void		rr(t_stack **a, t_stack **b);
 void		rra(t_stack **a, t_stack **b);
 void		rrb(t_stack **a, t_stack **b);
 void		rrr(t_stack **a, t_stack **b);
+void	ft_employop(t_stack **stk_a, t_stack **stk_b, char *op, int print);
 
 // ps_algo
 int			*ft_stktoarr(t_stack *stk, int size);
@@ -138,6 +141,7 @@ void	ft_pa_costs(t_stack **stk_a, t_stack **stk_b, t_utils u);
 void	ft_setops(int *r_ops, int *rr_ops, int combo);
 int	ft_findmin(int *arr, int nelem);
 void	ft_pa_decision(t_stack *b, t_utils *u);
-void	ft_n3sort(t_stack **a, t_stack **b);
+// void	ft_n3sort(t_stack **a, t_stack **b);
+void	ft_n3sort(t_stack **stk_a);
 
 #endif

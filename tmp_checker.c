@@ -6,13 +6,13 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 23:08:48 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/19 01:16:14 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/20 00:14:47 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ps_checker_bonus.h"
+#include "ps_bonus.h"
 
-void	printops(t_ops *ops)
+void	printops(t_ops *ops) // NA
 {
 	while (ops)
 	{
@@ -21,7 +21,7 @@ void	printops(t_ops *ops)
 	}
 }
 
-void	printfstrs(char **strs)
+void	printfstrs(char **strs) // NA
 {
 	int i;
 	
@@ -33,7 +33,7 @@ void	printfstrs(char **strs)
 	}
 }
 
-void	printstk(t_stack *stk)
+void	printstk(t_stack *stk) // NA
 {
 	t_stack	*t;
 
@@ -45,7 +45,7 @@ void	printstk(t_stack *stk)
 	t = stk;
 	while (stk)
 	{
-		ft_printf("s%d(%d)(tmp%d)(t%d)(f%d)\n", stk->data->val, stk->data->dist, stk->data->tmp_index, stk->data->target_index, stk->data->final);
+		ft_printf("s%d(%d)(tmp%d)(t%d)(f%d)\n", stk->data->val, stk->data->dist, stk->data->i, stk->data->target, stk->data->fi);
 		stk = stk->next;
 	}
 	stk = t;

@@ -1,16 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_init.c                                          :+:      :+:    :+:   */
+/*   ps_validations.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/07 01:07:54 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/19 20:16:10 by amenses-         ###   ########.fr       */
+/*   Created: 2023/02/19 22:22:12 by amenses-          #+#    #+#             */
+/*   Updated: 2023/02/19 22:24:01 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps.h"
+
+void	ft_error(char *msg)
+{
+	if (!msg)
+		exit(1);
+	ft_printf("%s\n", msg);
+	exit(1);
+}
 
 int	ft_check_input(int n, char **argv)
 {
@@ -47,7 +55,6 @@ int	ft_check_dups(t_stack *stk)
 	{
 		while (stk->next)
 		{
-			// ft_printf("(value=%d, next=%d)", t->val, stk->next->val);
 			if (t->data->val == stk->next->data->val)
 				return (0);
 			stk = stk->next;
@@ -62,7 +69,6 @@ int	ft_check_order(t_stack *stk)
 {
 	while (stk->next && (stk->data->val < stk->next->data->val))
 		stk = stk->next;
-	// ft_printf("testcheckorder=%d\n", stk->next == NULL);
 	if (!stk->next)
 		return (1);
 	return (0);
@@ -90,23 +96,3 @@ t_stack	*ft_get_stack(int n, char **argv)
 	}
 	return (a);
 }
-
-/* t_stack	*ft_get_stack(int n, char **argv)
-{
-	t_stack		*a;
-	long long	value;
-	int			i;
-
-	i = 1;
-	value = 0;
-	a = NULL;
-	while (i < n)
-	{
-		value = ft_long_atoi(argv[i]);
-		if (value > INTMAX || value < INTMIN)
-			ft_error("Error"); // terminate
-		ft_stkadd_last(&a, ft_stknew(value));
-		i++;
-	}
-	return (a);
-} */

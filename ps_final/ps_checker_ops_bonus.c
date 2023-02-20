@@ -1,80 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_checker_utils_bonus.c                           :+:      :+:    :+:   */
+/*   ps_readops_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/18 21:57:54 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/20 00:17:07 by amenses-         ###   ########.fr       */
+/*   Created: 2023/02/20 00:14:14 by amenses-          #+#    #+#             */
+/*   Updated: 2023/02/20 00:16:30 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ps_bonus.h"
 
-t_ops	*ft_opsnew(char *op) // utils_bonus
-{
-	t_ops	*node;
-
-	node = malloc(sizeof(t_ops));
-	if (!node)
-		return (NULL);
-	node->op = ft_strdup(op);
-	if (!node->op)
-		return (NULL);
-	node->next = NULL;
-	return (node);
-}
-
-void	ft_opsadd_last(t_ops **ops, t_ops *new) // utils_bonus
-{
-	t_ops	*t;
-
-	if (!*ops)
-	{
-		*ops = new;
-		new->next = NULL;
-		return ;
-	}
-	t = *ops;
-	while (t->next)
-	{
-		t = t->next;
-	}
-	t->next = new;
-}
-
-int		ft_opssize(t_ops *o) // utils_bonus
-{
-	int	i;
-
-	i = 0;
-	while (o)
-	{
-		o = o->next;
-		i++;
-	}
-	return (i);
-}
-
-void	ft_opsclear(t_ops **ops) // utils_bonus
-{
-	t_ops	*t;
-
-	if (!*ops)
-		return ;
-	t = *ops;
-	while (t)
-	{
-		t = (*ops)->next;
-		free((*ops)->op);
-		free(*ops);
-		*ops = t;
-	}
-	*ops = NULL;
-}
-
-void	ft_freecatalog(char **catalog) // readops
+void	ft_freecatalog(char **catalog)
 {
 	int	i;
 
@@ -87,7 +25,7 @@ void	ft_freecatalog(char **catalog) // readops
 	free(catalog);
 }
 
-int	ft_opcheck(char *op) // readops
+int	ft_opcheck(char *op)
 {
 	char	**c;
 	int		i;
@@ -109,7 +47,7 @@ int	ft_opcheck(char *op) // readops
 	return (0);
 }
 
-t_ops	*ft_readops(t_stack **stk) // readops
+t_ops	*ft_readops(t_stack **stk)
 {
 	t_ops	*ops;
 	char	*tmp;
@@ -131,7 +69,7 @@ t_ops	*ft_readops(t_stack **stk) // readops
 	return (ops);
 }
 
-void	ft_testops(t_stack **stk_a, t_ops *ops) // readops
+void	ft_testops(t_stack **stk_a, t_ops *ops)
 {
 	t_stack	*stk_b;
 

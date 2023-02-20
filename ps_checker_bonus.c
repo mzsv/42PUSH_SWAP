@@ -6,11 +6,11 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 21:31:00 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/19 04:01:17 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/20 00:08:07 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ps_checker_bonus.h"
+#include "ps_bonus.h"
 
 void	ft_error(char *msg)
 {

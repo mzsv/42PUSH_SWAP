@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 00:18:28 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/20 01:20:41 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/20 21:55:45 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,22 @@ typedef struct s_ops
 	struct s_ops	*next;
 }	t_ops;
 
-// ops
 void	ft_freecatalog(char **catalog);
+
 int		ft_opcheck(char *op);
+
 t_ops	*ft_readops(t_stack **stk);
+
 void	ft_testops(t_stack **stk_a, t_ops *ops);
 
-// utils
 t_ops	*ft_opsnew(char *op);
+
 void	ft_opsadd_last(t_ops **ops, t_ops *new);
+
 int		ft_opssize(t_ops *o);
+
 void	ft_opsclear(t_ops **ops);
 
-// main
 void	ft_term_checker(char *msg, t_stack **stk, t_ops **ops);
 
 #endif

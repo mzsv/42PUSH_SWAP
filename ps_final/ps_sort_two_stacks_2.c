@@ -6,7 +6,7 @@
 /*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 23:17:02 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/20 02:50:19 by amenses-         ###   ########.fr       */
+/*   Updated: 2023/02/20 21:47:26 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	ft_pb_move(t_stack **stk_a, t_stack **stk_b, t_utils u)
 	while (i < u.size - 3)
 	{
 		if (!ft_mfind((*stk_a)->data->val, u))
-		// if ((*stk_a)->data->val != u.m[0] && (*stk_a)->data->val != u.m[2])
 		{
 			ft_employop(stk_a, stk_b, "pb\n", 1);
 			i++;
@@ -67,7 +66,7 @@ void	ft_n3sort(t_stack **stk_a)
 	ft_set_limits(*stk_a, &u);
 	ft_finalindex(stk_a, u);
 	ft_pb_move(stk_a, &stk_b, u);
-	if (ft_stksize(*stk_a) > 2) // depends on the ft_pb_move
+	if (ft_stksize(*stk_a) > 2)
 		ft_sortstack(stk_a);
 	ft_pa_costs(stk_a, &stk_b, u);
 	ft_pa_decision(stk_b, &u);

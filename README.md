@@ -44,7 +44,7 @@ Push_swap is a project focused on creating an efficient sorting algorithm to sor
 
 2. Compile the code:
    ```sh
-   make bonus
+   make && make bonus
 
 3. Run the Program:
    ```sh

@@ -54,10 +54,12 @@ Push_swap is a project focused on creating an efficient sorting algorithm to sor
 - Initializing Stacks:
   ```sh
    ./push_swap 2 1 3 5 8 4
-- Check Sorting:
+- Check Sorting (using bash terminal):
+  ```sh
+  bash
   ```sh
    ARG="2 1 3 5 8 4"; ./push_swap $ARG | ./checker $ARG
-- Benchmarking Number of Operations:
+- Benchmarking Number of Operations (using bash terminal:
   ```sh
   ARG="2 1 3 5 8 4"; ./push_swap $ARG | wc -l
 

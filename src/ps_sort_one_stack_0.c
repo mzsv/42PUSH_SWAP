@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ps_sort_one_stack_0.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amenses- <amenses-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 22:54:44 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/20 01:15:44 by amenses-         ###   ########.fr       */
+/*   Updated: 2024/08/01 23:02:59 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ps.h"
+#include "../include/ps.h"
 
 void	ft_set_indexes(t_stack **stk)
 {

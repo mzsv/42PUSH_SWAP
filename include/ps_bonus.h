@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ps_bonus.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amenses- <amenses-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 00:18:28 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/20 21:55:45 by amenses-         ###   ########.fr       */
+/*   Updated: 2024/08/01 23:05:31 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PS_BONUS_H
 # define PS_BONUS_H
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include "ps.h"
 
 typedef struct s_ops

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_readops_bonus.c                                 :+:      :+:    :+:   */
+/*   ps_checker_ops_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amenses- <amenses-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 00:14:14 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/20 00:16:30 by amenses-         ###   ########.fr       */
+/*   Updated: 2024/08/01 23:01:58 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ps_bonus.h"
+#include "../include/ps_bonus.h"
 
 void	ft_freecatalog(char **catalog)
 {

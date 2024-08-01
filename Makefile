@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+         #
+#    By: amenses- <amenses-@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/19 23:31:48 by amenses-          #+#    #+#              #
-#    Updated: 2023/02/20 01:31:20 by amenses-         ###   ########.fr        #
+#    Updated: 2024/08/01 23:04:30 by amenses-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,8 @@ RM				=	rm -f
 CFLAGS			=	-Wall -Wextra -Werror
 
 LIBFT			=	libft/libft.a
+
+vpath %.c src/
 
 SRCS			=	ps_main.c ps_ops_pushswap.c ps_ops_revrotation.c \
 					ps_ops_rotation.c ps_sort_one_stack_0.c ps_sort_one_stack_1.c \

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ps_checker_main_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amenses- <amenses-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 00:20:45 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/20 01:35:30 by amenses-         ###   ########.fr       */
+/*   Updated: 2024/08/01 23:01:52 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ps_bonus.h"
+#include "../include/ps_bonus.h"
 
 void	ft_term_checker(char *msg, t_stack **stk, t_ops **ops)
 {

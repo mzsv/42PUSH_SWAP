@@ -3,11 +3,11 @@
 /*                                                        :::      ::::::::   */
 /*   ps_sort_one_stack_2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amenses- <amenses-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 23:06:37 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/20 01:16:18 by amenses-         ###   ########.fr       */
+/*   Updated: 2024/08/01 23:03:04 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ps.h"
+#include "../include/ps.h"

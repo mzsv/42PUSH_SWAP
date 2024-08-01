@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ps_ops_rotation.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amenses- <amenses-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 22:12:47 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/19 22:16:02 by amenses-         ###   ########.fr       */
+/*   Updated: 2024/08/01 23:03:16 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ps.h"
+#include "../include/ps.h"
 
 void	ra(t_stack **a, t_stack **b)
 {

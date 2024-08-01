@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ps_sort_one_stack_1.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amenses- <amenses-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 22:58:32 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/20 01:16:31 by amenses-         ###   ########.fr       */
+/*   Updated: 2024/08/01 23:03:02 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ps.h"
+#include "../include/ps.h"
 
 void	ft_direction(t_stack *stk, t_utils *u)
 {

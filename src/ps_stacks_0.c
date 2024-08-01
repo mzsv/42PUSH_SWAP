@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ps_stacks_0.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amenses- <amenses-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 22:33:13 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/20 00:26:40 by amenses-         ###   ########.fr       */
+/*   Updated: 2024/08/01 23:03:10 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ps.h"
+#include "../include/ps.h"
 
 t_stack	*ft_stknew(int value)
 {

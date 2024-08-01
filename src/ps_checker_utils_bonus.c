@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ps_checker_utils_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amenses- <amenses-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 00:16:16 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/20 00:24:43 by amenses-         ###   ########.fr       */
+/*   Updated: 2024/08/01 23:02:00 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ps_bonus.h"
+#include "../include/ps_bonus.h"
 
 t_ops	*ft_opsnew(char *op)
 {

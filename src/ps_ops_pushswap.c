@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ps_ops_pushswap.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amenses- <amenses-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 22:14:55 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/19 22:15:38 by amenses-         ###   ########.fr       */
+/*   Updated: 2024/08/01 23:02:57 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ps.h"
+#include "../include/ps.h"
 
 void	pa(t_stack **a, t_stack **b)
 {

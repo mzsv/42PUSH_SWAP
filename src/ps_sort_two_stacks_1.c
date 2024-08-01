@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ps_sort_two_stacks_1.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amenses- <amenses-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 23:13:46 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/20 01:07:22 by amenses-         ###   ########.fr       */
+/*   Updated: 2024/08/01 23:03:08 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ps.h"
+#include "../include/ps.h"
 
 void	ft_zeroexcept(int *r_ops, int pos1, int *rr_ops, int pos2)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ps_sort_two_stacks_2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amenses- <amenses-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amenses- <amenses-@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 23:17:02 by amenses-          #+#    #+#             */
-/*   Updated: 2023/02/20 21:47:26 by amenses-         ###   ########.fr       */
+/*   Updated: 2024/08/01 23:03:09 by amenses-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ps.h"
+#include "../include/ps.h"
 
 void	ft_pb_move(t_stack **stk_a, t_stack **stk_b, t_utils u)
 {
